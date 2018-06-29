@@ -54,6 +54,22 @@ public class AppMain {
             .required(false)
             .build();
 
+    private static final Option OPTION_MATCH_ALGORITHM__NAME_AND_SIZE =
+            new Option("nameAndSize", "matches based on name and size");
+
+    private static final Option OPTION_MATCH_ALGORITHM__NAME_SIZE_AND_MD5 =
+            new Option("nameSizeAndMD5", "matches based on name, size and MD5");
+
+    private static final Option OPTION_MATCH_ALGORITHM__EXTENSION_SIZE_AND_MD5 =
+            new Option("extensionSizeAndMD5", "matches based on extension, size and MD5");
+
+    private static final OptionGroup OPTION_GROUP_MATCH_ALGORITHM = new OptionGroup()
+            .addOption(OPTION_MATCH_ALGORITHM__NAME_AND_SIZE)
+            .addOption(OPTION_MATCH_ALGORITHM__NAME_SIZE_AND_MD5)
+            .addOption(OPTION_MATCH_ALGORITHM__EXTENSION_SIZE_AND_MD5)
+            // todo: fuzzy name matching?
+            ;
+
     private static final Options options = new Options()
             .addOption(OPTION_HELP)
             .addOption(OPTION_DEBUG)
@@ -61,6 +77,7 @@ public class AppMain {
             .addOption(OPTION_MUTABLE_DIRS)
             .addOption(OPTION_ROOT)
             .addOption(OPTION_INTERACTIVE_MODE)
+            .addOptionGroup(OPTION_GROUP_MATCH_ALGORITHM)
             ;
 
     private final Runnable systemExitHandler;
